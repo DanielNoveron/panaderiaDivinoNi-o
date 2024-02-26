@@ -1,0 +1,30 @@
+{
+    "reposteriaComun": [
+        {
+            "id": 1,
+            "nombre": "Conchitas",
+            "costo": 4.00,
+            "imagen": "conchitas.webp"
+        },
+        {
+            "id": 2,
+            "nombre": "Bolillo",
+            "costo": 3.00,
+            "imagen": "bolillo.webp"
+        },
+        {
+            "id": 3,
+            "nombre": "Orejas",
+            "costo": 5.00,
+            "imagen": "orejita.webp"
+        }
+    ],
+    "reposteriaPedido": [
+        {
+            "id": 1000,
+            "nombre": "Baguette",
+            "costo": 20.00,
+            "imagen": "baguette.webp"
+        }
+    ]
+}
