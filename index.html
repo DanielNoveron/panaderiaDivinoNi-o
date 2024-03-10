@@ -8,11 +8,13 @@
     <link rel="shortcut icon" href="./resources/icons/logo.svg" type="image/x-icon">
 </head>
 <body>
-
+    
     <div class="div-icon-slide-bolsita" onclick="openCloseModalBolsita('open')">
         <img width="40" height="40" src="./resources/icons/iconoBolsita.svg" alt="BOLSITA">
         <div class="div-counter-items dci2">0</div>
     </div>
+
+   
 
     <!--MODAL PARA AGREGAR UN PRODUCTO A LA BOLSITA-->
     <div class="div-mask dm1">
@@ -82,39 +84,56 @@
                 <div onclick="openCloseModalBolsita('close')" class="button-add-modal btnaddmclose">
                     <p>CERRAR</p>
                 </div>
-                <div class="button-add-modal btmakeorder" >
+                <div class="button-add-modal btmakeorder" onclick="sendPedido()">
                     <p>PEDIR</p>
                     <img width="20px" height="20px" src="./resources/icons/iconWhatsApp.svg" alt="WHATSAPP">
                 </div>
             </div>
         </div>
     </div>
+
     
     <header class="header">
+        <img class="icon-responsive" src="./resources/icons/logo.svg" alt="LOGO">
+    <input type="checkbox" name="closemenu" id="closemenu">
+    <label for="closemenu" class="div-menu-hamburguer" nclick="clickCheckMenu()">
+        <img width="30px" height="30px" src="./resources/icons/iconMenu.svg" alt="MENU">
+    </label>
+    <div class="mask-responsive"></div>
         <nav class="navbar">
+            
+            <label for="closemenu" class="times-button">
+                <img width="20px" height="20px" src="./resources/icons/iconCloseBlack.svg" alt="CERRAR" class="close">
+            </label>
+            
             <div class="icon-div">
                 <img src="./resources/icons/logo.svg" alt="LOGO">
             </div>
             <ul class="list">
                 <li>
-                    <a href="#reposteria">RESPOSTERIA</a>
+                    <a onclick="clickCheckMenu()" href="#reposteria">RESPOSTERIA</a>
                 </li>
                 <li>
-                    <a href="#contacto">CONTACTO</a>
+                    <a onclick="clickCheckMenu()" href="#contacto">CONTACTO</a>
                 </li>
                 <li>
-                    <a href="#horarios">HORARIOS</a> 
+                    <a onclick="clickCheckMenu()" href="#horarios">HORARIOS</a> 
                 </li>
                 <li>
-                    <a href="#ubicacion">UBICACIÓN</a>
+                    <a onclick="clickCheckMenu()" href="#ubicacion">UBICACIÓN</a>
                 </li>
                 <li class="li-bolsita" onclick="openCloseModalBolsita('open')">
-                    <img width="40" height="40" src="./resources/icons/iconoBolsita.svg" alt="BOLSITA">
-                    <div class="div-counter-items">0</div>
+                    <label for="closemenu">
+                        <img width="40" height="40" src="./resources/icons/iconoBolsita.svg" alt="BOLSITA">
+                    <div class="div-counter-items dci3">0</div>
+                    </label>
+                    
                 </li>
             </ul>
         </nav>
     </header>
+
+    
     
 
     <div class="presentation">
@@ -133,7 +152,7 @@
     </div>
 
     <div class="news">
-        <img src="./resources/images/noticia.webp" alt="NOTICIA">
+        <img id="imagenpresentacion" src="./resources/images/#" alt="NOTICIA">
     </div>
 
     <div class="reposteria">
@@ -172,11 +191,11 @@
 
                     <div class="media-contact">
                         <img width="30px" height="30px" src="./resources/icons/iconFacebook.svg" alt="FACEBOOK">
-                        <small class="small-text"><a href="#">Facebook | Panadería San Miguel</a></small>
+                        <small class="small-text"><a id="sectionFacebook" target="_blank" href="#">Facebook | Panadería San Miguel</a></small>
                         <img width="30px" height="30px" src="./resources/icons/iconemail.svg" alt="EMAIL">
-                        <small class="small-text"><a href="#">villaGroPanaderiaSanMiguel.com</a></small>
+                        <small class="small-text"><a id="emailsection" href="#">villaGroPanaderiaSanMiguel.com</a></small>
                         <img width="30px" height="30px" src="./resources/icons/iconWhatsApp.svg" alt="WHATSAPP">
-                        <small class="small-text"><a href="#">+7223456778</a></small> 
+                        <small class="small-text"><a id="numtelsection" target="_blank" href="#">+7223456778</a></small> 
                        
                     </div>
                 </div>
@@ -191,7 +210,7 @@
 
                     <div class="media-contact">
                         <img width="30px" height="30px" src="./resources/icons/iconLocation.svg" alt="UBICACION">
-                        <small class="small-text"><a href="#">Calle Niños herores Calz, Geuerrero. Mex. Edo Mex. CP: 51760 <br> Click para ver en Google Maps</a></small>
+                        <small  class="small-text"><a id="locationsectioninformation" target="_blank" href="#">Calle Niños herores Calz, Geuerrero. Mex. Edo Mex. CP: 51760 <br> Click para ver en Google Maps</a></small>
                     </div>
                 </div>
                 <div class="image-product">
@@ -206,10 +225,10 @@
                     <div class="media-contact">
                         <img width="30px" height="30px" src="./resources/icons/iconoHorario.svg" alt="HORARIOS DE ATENCION">
                         <small class="small-text"><b>Lunes - Viernes</b></small>
-                        <small class="small-text">6:00 am - 9:00 pm</small>
+                        <small id="horarioslunesviernes" class="small-text">6:00 am - 9:00 pm</small>
                         <br>
                         <small class="small-text"><b>Sabados y Domingos</b></small>
-                        <small class="small-text">11:00 am - 3:00 pm</small>
+                        <small id="horariossabadodomingo" class="small-text">11:00 am - 3:00 pm</small>
                     </div>
                 </div>
                 <div class="image-product">
@@ -223,38 +242,38 @@
     <footer class="footer">
         <div class="div-three-column">
            <div class="left">
-            <p>&copy; Copyright | Panadería San Miguel | 2024</p>
+            <p>Panadería San Miguel | 2024</p>
             <div class="columns-panaderia">
                 <div class="div-column-logo">
                     <img src="./resources/icons/logo.svg" alt="LOGO">
                 </div>
                 <div class="div-icons-social-media">
                     <div class="columns-icons">
-                        <img width="50px" height="50px" src="./resources/icons/iconFacebook.svg" alt="FACEBOOK">
-                        <img width="50px" height="50px" src="./resources/icons/iconemail.svg" alt="EMAIL">
-                        <img width="50px" height="50px" src="./resources/icons/iconWhatsApp.svg" alt="WHATSAPP">
-                        <img width="50px" height="50px" src="./resources/icons/iconInstagram.svg" alt="INSTAGRAM">
-                    </div>
+                        <img onclick="openLink('facebookPanaderia', 'link')" width="50px" height="50px" src="./resources/icons/iconFacebook.svg" alt="FACEBOOK">
+                        <img onclick="openLink('correoPanaderia', 'email')" width="50px" height="50px" src="./resources/icons/iconemail.svg" alt="EMAIL">
+                        <img onclick="openLink('telefonoSendWhatsApp', 'phone')" width="50px" height="50px" src="./resources/icons/iconWhatsApp.svg" alt="WHATSAPP">
+                        <img onclick="openLink('instagramPänaderia', 'link')" width="50px" height="50px" src="./resources/icons/iconInstagram.svg" alt="INSTAGRAM">
+                    </div> 
                 </div>
             </div>
            </div>
            <div class="center">
-                <img width="300px" height="200px" src="./resources/icons/cuernito.svg" alt="CUERNITO">
+                <img  src="./resources/icons/cuernito.svg" alt="CUERNITO">
            </div>
            <div class="right">
-            <p>Página web desarrollada por <a target="_blank" href="https://www.facebook.com/profile.php?id=61556426289886">AlphaOptimized</a> </p>
-            <div class="columns-panaderia">
+            <p>&copy; Copyright | Página web desarrollada por <a target="_blank" href="https://www.facebook.com/">PDGN</a> | 2024 </p>
+            <div class="columns-panaderia cpr">
               
                 <div class="div-icons-social-media">
                     <div class="columns-icons">
-                        <img width="50px" height="50px" src="./resources/icons/iconFacebook.svg" alt="FACEBOOK">
-                        <img width="50px" height="50px" src="./resources/icons/iconemail.svg" alt="EMAIL">
-                        <img width="50px" height="50px" src="./resources/icons/iconWhatsApp.svg" alt="WHATSAPP">
-                        <img width="50px" height="50px" src="./resources/icons/iconInstagram.svg" alt="INSTAGRAM">
+                        <img onclick="openLink('facebookPDGN', 'link')" width="50px" height="50px" src="./resources/icons/iconFacebook.svg" alt="FACEBOOK">
+                        <img onclick="openLink('correoPDGN', 'email')" width="50px" height="50px" src="./resources/icons/iconemail.svg" alt="EMAIL">
+                        <img onclick="openLink('telefonoPDGN', 'phone')" width="50px" height="50px" src="./resources/icons/iconWhatsApp.svg" alt="WHATSAPP">
+                        <img onclick="openLink('instagramPDGN', 'link')" width="50px" height="50px" src="./resources/icons/iconInstagram.svg" alt="INSTAGRAM">
                     </div>
                 </div>
                 <div class="div-column-logo dcia">
-                    <img src="./resources/icons/alphaOptimized.svg" alt="LOGO">
+                    <img src="./resources/icons/PDGN_logo.svg" alt="LOGO">
                 </div>
             </div>
            </div>

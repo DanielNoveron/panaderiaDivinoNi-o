@@ -20,6 +20,68 @@ var totalPay = document.getElementById('totalPay');
 var emptyListMessage = document.querySelector('.emptyList');
 var btnMakeOrder = document.querySelector('.btmakeorder');
 
+var checkMenu = document.getElementById('closemenu');
+
+var bolsitaSlider = document.querySelector('.div-icon-slide-bolsita');
+
+var sectionHorarioLunesViernes = document.getElementById('horarioslunesviernes');
+var sectionHorarioSabadoDomingo = document.getElementById('horariossabadodomingo');
+var sectionUbicacionInformacion = document.getElementById('locationsectioninformation');
+var sectionNumeroTelefono = document.getElementById('numtelsection');
+var sectionEmailSection = document.getElementById('emailsection');
+var sectionFacebook = document.getElementById('sectionFacebook');
+var imagenPresentacion = document.getElementById('imagenpresentacion');
+
+
+const PROPIEDAD_HORARIO_LUNES_VIERNES = "lunesViernesHorario";
+const PROPIEDAD_HORARIO_SABADO_DOMINGO = "sabadoDomingoHorario";
+const PROPIEDAD_UBICACION_ = "ubicacionPanaderia";
+const PROPIEDAD_GEOLOCALIZACION = "geolocalizacionPanaderia";
+const PROPIEDAD_NUM_CONTACTO = "telefonoSendWhatsApp";
+const PROPIEDAD_CORREO_ELECTRONICO = "correoPanaderia";
+const PROPIEDAD_FACEBOOK = "facebookPanaderia";
+const PROPIEDAD_IMAGEN = "imagenPresentacion";
+
+var PROPIERTIES_CONFIG = null;
+
+document.addEventListener('DOMContentLoaded', async function() {
+    PROPIERTIES_CONFIG = await obtenerPropiedadesConfig();
+    // Hacemos la carga de la información dinamica del archivo config.jsona
+   sectionHorarioLunesViernes.textContent = PROPIERTIES_CONFIG[PROPIEDAD_HORARIO_LUNES_VIERNES];
+   sectionHorarioSabadoDomingo.textContent = PROPIERTIES_CONFIG[PROPIEDAD_HORARIO_SABADO_DOMINGO];
+   sectionUbicacionInformacion.innerHTML = PROPIERTIES_CONFIG[PROPIEDAD_UBICACION_];
+   sectionUbicacionInformacion.setAttribute('href', 'https://www.google.com/maps?q=' + PROPIERTIES_CONFIG[PROPIEDAD_GEOLOCALIZACION]);
+   sectionNumeroTelefono.textContent = PROPIERTIES_CONFIG[PROPIEDAD_NUM_CONTACTO];
+   sectionNumeroTelefono.setAttribute('href', `https://wa.me/${PROPIERTIES_CONFIG[PROPIEDAD_NUM_CONTACTO]}?text=¡Hola! Panadería San Miguel`);
+   sectionEmailSection.textContent = PROPIERTIES_CONFIG[PROPIEDAD_CORREO_ELECTRONICO];
+   sectionEmailSection.setAttribute('href', `mailto:${PROPIERTIES_CONFIG[PROPIEDAD_CORREO_ELECTRONICO]}`);
+   sectionFacebook.setAttribute('href', PROPIERTIES_CONFIG[PROPIEDAD_FACEBOOK]);
+   imagenPresentacion.setAttribute('src', `./resources/images/${PROPIERTIES_CONFIG[PROPIEDAD_IMAGEN]}`);
+});
+
+
+async function obtenerPropiedadesConfig() {
+    try {
+        const respuesta = await fetch("./resources/data/config.json"); // Obtiene el archivo JSON
+        const json = await respuesta.json(); // Convierte la respuesta a JSON
+
+        return json; // Devuelve la propiedad solicitada
+    } catch (error) {
+        console.error("Error al cargar el archivo JSON: ", error);
+    }
+}
+
+function openLink(link, type) {
+    if(type == "link"){
+        window.open(PROPIERTIES_CONFIG[link])
+    }else if(type == "phone"){
+        window.open(`https://wa.me/${PROPIERTIES_CONFIG[link]}?text=¡Hola! Panadería San Miguel`)
+    }else if(type == "email"){
+        window.open(`mailto:${PROPIERTIES_CONFIG[link]}`)
+    }
+   
+}
+
 
 const ACTION_OPEN = "open";
 const ACTION_CLOSE = "close";
@@ -166,6 +228,7 @@ function devolverSeccionProducto(producto){
     <div class="div-footer-product">
         <p>${producto.nombre}</p>
     </div>
+    <p class="costo-product">$${producto.costo}</p>
     <div class="button-add" onclick="openAddProduct(this)">
         <img src="./resources/icons/add.svg" alt="ADD">
     </div>
@@ -308,7 +371,77 @@ window.addEventListener('scroll', function() {
     } else {
         divBolsita.classList.remove('disb-active');  // Oculta el div
     }
+    
 });
+
+function clickCheckMenu(){
+    checkMenu.checked = !checkMenu.checked;
+}
+
+checkMenu.addEventListener('change', function(){
+    var divBolsita = document.querySelector('.div-icon-slide-bolsita');
+    if(checkMenu.checked){
+        divBolsita.style.display = "none";
+    }else{
+        divBolsita.style.display = "flex";
+    }
+});
+
+
+function sendPedido() {
+    obtenerUbicacion(function(direccionUsuario) {
+        let mensaje = "¡Hola!\nMe gustaría solcitar estas piezas:\n\n*Productos:*\n";
+
+        const datosAlmacenados = localStorage.getItem(DATA_BOLSITA);
+
+        if (datosAlmacenados) {
+            const datos = JSON.parse(datosAlmacenados);
+            datos.forEach((producto, indice) => {
+                mensaje += `* *${indice + 1}* | ${producto.nombre} | ${producto.cantidad} unidades\n`;
+            });
+
+            // Añade la dirección al mensaje
+            if (direccionUsuario) {
+                mensaje += `\n*Dirección de entrega:*\n${direccionUsuario}`;
+            }
+
+            // Codifica el mensaje para URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            
+            // Crea la URL de WhatsApp
+            const numero = "5628385629"; // Reemplaza con el número real
+            const urlWhatsApp = `https://wa.me/${numero}?text=${mensajeCodificado}`;
+
+            // Abre WhatsApp en una nueva pestaña
+            window.open(urlWhatsApp, '_blank');
+        } else {
+            console.log('No hay datos para enviar');
+        }
+    });
+}
+
+
+function obtenerUbicacion(callback) {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                var latitud = position.coords.latitude;
+                var longitud = position.coords.longitude;
+                callback("https://www.google.com/maps?q=" + latitud + ',' + longitud); // Llamamos al callback con la ubicación
+            },
+            function(error) {
+                // Manejo de errores
+                console.error("Error al obtener la ubicación: ", error);
+                callback(null); // Llamamos al callback con null en caso de error
+            }
+        );
+    } else {
+        alert("Tu navegador no soporta la Geolocalización.");
+        callback(null);
+    }
+}
+
+
 
 
 
