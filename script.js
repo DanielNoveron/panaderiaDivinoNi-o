@@ -181,10 +181,13 @@ function mostrarProductosEnBolista(){
      
     if(productosEnBolsita.length == 0){
         emptyListMessage.style.display = "block";
+        btnMakeOrder.style.display = "none";
         btnMakeOrder.classList.add('disabled-style');
+        
     }else{
         emptyListMessage.style.display = "none";
         btnMakeOrder.classList.remove('disabled-style');
+        btnMakeOrder.style.display = "flex";
     }
 
     productosEnBolsita.forEach(producto => {
