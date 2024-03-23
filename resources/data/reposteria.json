@@ -40,7 +40,7 @@
             "id": 7,
             "nombre": "Pastel (Vidriosa)",
             "costo": 7.00,
-            "imagen": "undefined.png"
+            "imagen": "undefinedd.png"
         },
         {
             "id": 8,
@@ -76,7 +76,7 @@
             "id": 13,
             "nombre": "Volovanes",
             "costo": 7.00,
-            "imagen": "undefined.png"
+            "imagen": "undefinedd.png"
         },
         {
             "id": 14,
@@ -88,25 +88,25 @@
             "id": 15,
             "nombre": "Empanada de arroz",
             "costo": 8.00,
-            "imagen": "undefined.png"
+            "imagen": "undefinedd.png"
         },
         {
             "id": 16,
             "nombre": "Trenza de Higo",
             "costo": 15.00,
-            "imagen": "undefined.png"
+            "imagen": "undefinedd.png"
         },
         {
             "id": 17,
             "nombre": "Cuerno de Higo",
             "costo": 15.00,
-            "imagen": "undefined.png"
+            "imagen": "undefinedd.png"
         },
         {
             "id": 18,
             "nombre": "Pan Danés",
             "costo": 6.00,
-            "imagen": "undefined.png"
+            "imagen": "undefinedd.png"
         },
         {
             "id": 19,

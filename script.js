@@ -412,7 +412,7 @@ function sendPedido() {
             const mensajeCodificado = encodeURIComponent(mensaje);
             
             // Crea la URL de WhatsApp
-            const numero = "5628385629"; // Reemplaza con el número real
+            const numero = "7226264354"; // Reemplaza con el número real
             const urlWhatsApp = `https://wa.me/${numero}?text=${mensajeCodificado}`;
 
             // Abre WhatsApp en una nueva pestaña
